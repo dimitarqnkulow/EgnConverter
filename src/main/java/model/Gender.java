@@ -1,4 +1,6 @@
-enum Gender {
+package model;
+
+public enum Gender {
     MALE,
     FEMALE;
     public String toDisplay(){

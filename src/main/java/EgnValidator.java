@@ -10,6 +10,5 @@ public class EgnValidator {
             throw new ValidationsException(ErrorCode.EGN_INVALID);
         }
         //валидация за месец от 1 до 12
-        //нов класс Exception InvalidEgnException
     }
 }

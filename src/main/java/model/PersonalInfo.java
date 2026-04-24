@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDate;
 
 public class PersonalInfo{
@@ -27,7 +29,7 @@ public class PersonalInfo{
     public String printMyProperties(){
         String printInfo =
                 "Birth date: " + this.birthDate + "\n"
-                + "Gender: " + this.gender + "\n"
+                + "model.Gender: " + this.gender + "\n"
                 + "Age: " +this.age + "\n" ;
         return printInfo;
     }

@@ -1,3 +1,5 @@
+package utils;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,6 +13,7 @@ public class EgnReader {
             InputStream is = EgnReader.class
                     .getClassLoader()
                     .getResourceAsStream("file/egns.json");
+
             JsonNode node = mapper.readTree(is);
 
             return node.get("egn").asText();

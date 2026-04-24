@@ -1,6 +1,10 @@
 import exception.ValidationsException;
+import model.Gender;
+import model.PersonalInfo;
+import utils.EgnReader;
 import java.time.LocalDate;
 import java.time.Period;
+
 //всичко да е private и да чета за енкапсулацията
 public class EgnConverter {
     //Това са константни променлви
@@ -9,6 +13,7 @@ public class EgnConverter {
 
     public static void main(String[] args) {
         String egn;
+
             try {
                 egn = EgnReader.readEgnFromJson();
                 EgnValidator.validateEgn(egn);
