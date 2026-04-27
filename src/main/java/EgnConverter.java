@@ -4,6 +4,7 @@ import model.PersonalInfo;
 import utils.EgnReader;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 //всичко да е private и да чета за енкапсулацията
 public class EgnConverter {
@@ -12,7 +13,7 @@ public class EgnConverter {
     private static final int MONTH_21ST_CENTURY_MAX = 52;
 
     public static void main(String[] args) {
-        String egn;
+        List<String> egn;
 
             try {
                 egn = EgnReader.readEgnFromJson();

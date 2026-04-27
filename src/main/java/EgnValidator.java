@@ -1,8 +1,10 @@
 import exception.ErrorCode;
 import exception.ValidationsException;
 
+import java.util.List;
+
 public class EgnValidator {
-    public static void validateEgn(String egn){
+    public static void validateEgn(egn){
         if (egn == null) {
             throw new ValidationsException(ErrorCode.EGN_MISSING);
         }
