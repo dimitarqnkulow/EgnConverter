@@ -4,7 +4,7 @@ import exception.ValidationsException;
 import java.util.List;
 
 public class EgnValidator {
-    public static void validateEgn(egn){
+    public static void validateEgn(String egn){
         if (egn == null) {
             throw new ValidationsException(ErrorCode.EGN_MISSING);
         }

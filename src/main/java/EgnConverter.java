@@ -1,9 +1,16 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.ValidationsException;
+import model.Egn;
 import model.Gender;
 import model.PersonalInfo;
 import utils.EgnReader;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Comparator;
 import java.util.List;
 
 //всичко да е private и да чета за енкапсулацията
@@ -13,21 +20,32 @@ public class EgnConverter {
     private static final int MONTH_21ST_CENTURY_MAX = 52;
 
     public static void main(String[] args) {
-        List<String> egn;
+        try {
+            String json = Files.readString(Paths.get("src/main/resources/file/egns.json"));
+            ObjectMapper mapper  = new ObjectMapper();
+            Egn egnArray = mapper.readValue(json,Egn.class);
+            List <String> validEgns = egnArray.getEgn().stream()
+                    .filter(IsValidEgn::isValidEgn)
+                    .sorted(Comparator.comparing(EgnConverter::getAge))
+                    .toList();
+            for (String egn : validEgns){
+//                try {
+//                    egn = EgnReader.readEgnFromJson();
+//                    EgnValidator.validateEgn(egnArray[i]);
+//                } catch (ValidationsException e){
+//                    System.out.println(e.getErrorMessage());
+//                    return;
+//                }
 
-            try {
-                egn = EgnReader.readEgnFromJson();
-                EgnValidator.validateEgn(egn);
-            } catch (ValidationsException e){
-                System.out.println(e.getErrorMessage());
-                return;
+                PersonalInfo personalInfo = new PersonalInfo();
+                personalInfo.setBirthDate(getBirthDate(egn));
+                personalInfo.setGender(getGender(egn));
+                personalInfo.setAge(getAge(egn));
+                System.out.println(personalInfo.printMyProperties());
             }
-
-        PersonalInfo personalInfo = new PersonalInfo();
-        personalInfo.setBirthDate(getBirthDate(egn));
-        personalInfo.setGender(getGender(egn));
-        personalInfo.setAge(getAge(egn));
-        System.out.println(personalInfo.printMyProperties());
+        } catch (RuntimeException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static LocalDate getBirthDate (String egn) {
